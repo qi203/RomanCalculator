@@ -6,7 +6,7 @@
 
 /* Define Tests to Validate Arguments */
 
-START_TEST(passingInvalidArgumentReturnsTestFailure)
+START_TEST(passingNullArgumentReturnsTestFailure)
 {
     int testStatus;
     char *arg1 = '\0', *arg2 = '\0';
@@ -15,18 +15,40 @@ START_TEST(passingInvalidArgumentReturnsTestFailure)
 }
 END_TEST
 
+START_TEST(passingInvalidArgumentReturnsTestFailure)
+{
+    int testStatus;
+    char *arg1 = "A", *arg2 = "L";
+    testStatus = testWhetherArgumentsAreValid(arg1, arg2);
+    ck_assert_int_eq(testStatus, FAILURE);
+}
+END_TEST
+
+START_TEST(passingValidArgumentReturnsTestSuccess)
+{
+    int testStatus;
+    char *arg1 = "MDCXL", *arg2 = "MV";
+    testStatus = testWhetherArgumentsAreValid(arg1, arg2);
+    ck_assert_int_eq(testStatus, SUCCESS);
+}
+END_TEST
+
 Suite *romanCalculatorSuite(void)
 {
     Suite *testSuite;
     testSuite = suite_create("Calculator");
     
-    TCase *validateInputArgumentsTestCase;
+    TCase *validateInputArgumentsTestCase, *additionTestCase;
     validateInputArgumentsTestCase = tcase_create("Validate Input Arguments");
     
     /* Validation of Input Arguments - Test Cases */
+    tcase_add_test(validateInputArgumentsTestCase, passingNullArgumentReturnsTestFailure);
     tcase_add_test(validateInputArgumentsTestCase, passingInvalidArgumentReturnsTestFailure);
+    tcase_add_test(validateInputArgumentsTestCase, passingValidArgumentReturnsTestSuccess);
     
+    /* Addition of Roman Literals - Test Cases */
     suite_add_tcase(testSuite, validateInputArgumentsTestCase);
+    suite_add_tcase(testSuite, additionTestCase);
 
     return testSuite;
 }
