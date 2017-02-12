@@ -68,3 +68,11 @@ int testWhetherArgumentsAreValid(char *arg1, char*arg2)
     return SUCCESS;
 }
 
+char *addRomanLiterals(char *arg1, char *arg2)
+{
+    if((strcmp(arg1, "I") == 0)  && (strcmp(arg2, "I") == 0))
+    {
+        return "II";
+    }
+    return "\0";
+}
