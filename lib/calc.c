@@ -3,10 +3,11 @@
 
 #include "calc.h"
 
-// Structure to hold Roman Literals
-struct Variable {
-    char *arg1;
-    char *arg2;
-};
-
+int testWhetherArgumentsAreValid(char *arg1, char*arg2)
+{
+    if(arg1 == '\0' || arg2 == '\0')
+    {
+        return FAILURE;
+    }
+}
 
