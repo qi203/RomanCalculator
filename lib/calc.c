@@ -3,6 +3,13 @@
 
 #include "calc.h"
 
+typedef struct _MappingStructure {
+    char romanLiterals[2];
+    int  decimalValue;
+} MappingStructure;
+
+MappingStructure myStruct;
+
 int convertRomanLiteralToDecimalNumber(char arg)
 {
     if (arg == 'I') {
@@ -50,7 +57,7 @@ int convertRomanStringToDecimalValue(char *arg)
             decimalValueOfArgument = decimalValueOfArgument + tempLiteralVariable1;
         }
     }
-    return SUCCESS;
+    return decimalValueOfArgument;
 
 }
 
@@ -68,11 +75,27 @@ int testWhetherArgumentsAreValid(char *arg1, char*arg2)
     return SUCCESS;
 }
 
-char *addRomanLiterals(char *arg1, char *arg2)
+void defineMapIntegerToRomanString(void)
 {
-    if((strcmp(arg1, "I") == 0)  && (strcmp(arg2, "I") == 0))
-    {
-        return "II";
+    strcpy(myStruct.romanLiterals, "I");
+    myStruct.decimalValue = 1;
+    
+//    if(arg)
+}
+
+int addRomanLiterals(char *arg1, char *arg2, char *resultRomanString)
+{
+    if(testWhetherArgumentsAreValid(arg1, arg2) == FAILURE) {
+        return FAILURE;
     }
-    return "\0";
+    defineMapIntegerToRomanString();
+    int resultDecimalValue;
+    resultDecimalValue = convertRomanStringToDecimalValue(arg1) + convertRomanStringToDecimalValue(arg2);
+    while(resultDecimalValue != 0) {
+        while(resultDecimalValue >= myStruct.decimalValue) {
+            strcat(resultRomanString, myStruct.romanLiterals);
+            resultDecimalValue = resultDecimalValue - myStruct.decimalValue;
+        }
+    }
+    return SUCCESS;
 }
