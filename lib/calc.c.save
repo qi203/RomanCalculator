@@ -8,7 +8,7 @@ typedef struct _MappingStructure {
     int  decimalValue;
 } MappingStructure;
 
-MappingStructure myStruct[4];
+MappingStructure myStruct;
 
 int convertRomanLiteralToDecimalNumber(char arg)
 {
@@ -77,33 +77,25 @@ int testWhetherArgumentsAreValid(char *arg1, char*arg2)
 
 void defineMapIntegerToRomanString(void)
 {
-    strcpy(myStruct[0].romanLiterals, "IX");
-    myStruct[0].decimalValue = 9;
-    strcpy(myStruct[1].romanLiterals, "V");
-    myStruct[1].decimalValue = 5;
-    strcpy(myStruct[2].romanLiterals, "IV");
-    myStruct[2].decimalValue = 4;
-    strcpy(myStruct[3].romanLiterals, "I");
-    myStruct[3].decimalValue = 1;
+    strcpy(myStruct.romanLiterals, "I");    myStruct.decimalValue = 1;
     
-//    if(arg)
 }
 
-int addRomanLiterals(char *arg1, char *arg2, char *resultRomanString)
+char *addRomanLiterals(char *arg1, char *arg2)
 {
     if(testWhetherArgumentsAreValid(arg1, arg2) == FAILURE) {
-        return FAILURE;
+        return NULL;
     }
     defineMapIntegerToRomanString();
     int resultDecimalValue;
-    int indexMyStructArray = 0;
+    char resultRomanString[50] = {'\0'};
     resultDecimalValue = convertRomanStringToDecimalValue(arg1) + convertRomanStringToDecimalValue(arg2);
     while(resultDecimalValue != 0) {
-        while(resultDecimalValue >= myStruct[indexMyStructArray].decimalValue) {
-            strcat(resultRomanString, myStruct[indexMyStructArray].romanLiterals);
-            resultDecimalValue = resultDecimalValue - myStruct[indexMyStructArray].decimalValue;
+        while(resultDecimalValue >= myStruct.decimalValue) {
+            strcat(resultRomanString, myStruct.romanLiterals);
+            resultDecimalValue = resultDecimalValue - myStruct.decimalValue;
         }
-        indexMyStructArray++;
     }
-    return SUCCESS;
+    printf("%s\n",resultRomanString);
+    return resultRomanString[0];
 }
