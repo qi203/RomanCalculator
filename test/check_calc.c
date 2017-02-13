@@ -222,17 +222,37 @@ START_TEST(subtractionOf_I_From_X_Returns_IX)
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_str_eq(resultRomanString,"IX");
-    printf("Test 22 - Subtraction Sample Input 2 Returned Test Failure\n");
+    printf("Test 22 - Subtraction Sample Input 2 Returned Test Success\n");
 }
 END_TEST
 
-START_TEST(subtractionOf_V_From_C_Returns_LXLV)
+START_TEST(subtractionOf_V_From_C_Returns_XCV)
 {
     char *arg1 = "C", *arg2 = "V";
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_str_eq(resultRomanString,"XCV");
-    printf("Test 23 - Subtraction Sample Input 3 Returned Test Failure\n");
+    printf("Test 23 - Subtraction Sample Input 3 Returned Test Success\n");
+}
+END_TEST
+
+START_TEST(subtractionOf_C_From_M_Returns_CM)
+{
+    char *arg1 = "M", *arg2 = "C";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"CM");
+    printf("Test 24 - Subtraction Sample Input 4 Returned Test Success\n");
+}
+END_TEST
+
+START_TEST(subtractionOf_XII_From_LXVIII_Returns_CM)
+{
+    char *arg1 = "LXVIII", *arg2 = "XII";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"LVI");
+    printf("Test 25 - Subtraction Sample Input 5 Returned Test Success\n");
 }
 END_TEST
 
@@ -273,7 +293,9 @@ Suite *romanCalculatorSuite(void)
     tcase_add_test(subtractionTestCase, subtractionResultEqualToNegativeValuesReturnsFailure);
     tcase_add_test(subtractionTestCase, subtractionOf_I_From_I_ReturnsFailure);
     tcase_add_test(subtractionTestCase, subtractionOf_I_From_X_Returns_IX);
-    tcase_add_test(subtractionTestCase, subtractionOf_V_From_C_Returns_LXLV);
+    tcase_add_test(subtractionTestCase, subtractionOf_V_From_C_Returns_XCV);
+    tcase_add_test(subtractionTestCase, subtractionOf_C_From_M_Returns_CM);
+    tcase_add_test(subtractionTestCase, subtractionOf_XII_From_LXVIII_Returns_CM);
 
 
     suite_add_tcase(testSuite, validateInputArgumentsTestCase);
