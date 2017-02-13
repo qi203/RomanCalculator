@@ -262,8 +262,17 @@ START_TEST(subtractionOf_XLIII_From_CXXIX_Returns_LXXXVI)
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_str_eq(resultRomanString,"LXXXVI");
-    printf("%s\n",resultRomanString);
     printf("Test 26 - Subtraction Sample Input 6 Returned Test Success\n");
+}
+END_TEST
+
+START_TEST(subtractionOf_CD_From_CM_Returns_D)
+{
+    char *arg1 = "CM", *arg2 = "CD";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"D");
+    printf("Test 28 - Subtraction Sample Input 7 Returned Test Success\n");
 }
 END_TEST
 
@@ -308,6 +317,7 @@ Suite *romanCalculatorSuite(void)
     tcase_add_test(subtractionTestCase, subtractionOf_C_From_M_Returns_CM);
     tcase_add_test(subtractionTestCase, subtractionOf_XII_From_LXVIII_Returns_CM);
     tcase_add_test(subtractionTestCase, subtractionOf_XLIII_From_CXXIX_Returns_LXXXVI);
+    tcase_add_test(subtractionTestCase, subtractionOf_CD_From_CM_Returns_D);
 
 
     suite_add_tcase(testSuite, validateInputArgumentsTestCase);
