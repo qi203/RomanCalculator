@@ -192,7 +192,7 @@ START_TEST(subtractionOfEqualRomanStringsReturnsFailure)
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_int_eq(testStatus,FAILURE);
-    printf("Test 19 - Subtraction Result of Zero Is Invalid Number in Roman - Returned Test Failure\n");
+    printf("Test 21 - Subtraction Result of Zero Is Invalid Number in Roman - Returned Test Failure\n");
 }
 END_TEST
 
@@ -202,7 +202,7 @@ START_TEST(subtractionResultEqualToNegativeValuesReturnsFailure)
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_int_eq(testStatus,FAILURE);
-    printf("Test 20 - Subtraction Result Equal To Negative Is Invalid Number in Roman - Returned Test Failure\n");
+    printf("Test 22 - Subtraction Result Equal To Negative Is Invalid Number in Roman - Returned Test Failure\n");
 }
 END_TEST
 
@@ -212,7 +212,7 @@ START_TEST(subtractionOf_I_From_I_ReturnsFailure)
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_int_eq(testStatus,FAILURE);
-    printf("Test 21 - Subtraction Sample Input 1 Returned Test Failure\n");
+    printf("Test 23 - Subtraction Sample Input 1 Returned Test Failure\n");
 }
 END_TEST
 
@@ -222,7 +222,7 @@ START_TEST(subtractionOf_I_From_X_Returns_IX)
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_str_eq(resultRomanString,"IX");
-    printf("Test 22 - Subtraction Sample Input 2 Returned Test Success\n");
+    printf("Test 24 - Subtraction Sample Input 2 Returned Test Success\n");
 }
 END_TEST
 
@@ -232,7 +232,7 @@ START_TEST(subtractionOf_V_From_C_Returns_XCV)
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_str_eq(resultRomanString,"XCV");
-    printf("Test 23 - Subtraction Sample Input 3 Returned Test Success\n");
+    printf("Test 25 - Subtraction Sample Input 3 Returned Test Success\n");
 }
 END_TEST
 
@@ -242,7 +242,7 @@ START_TEST(subtractionOf_C_From_M_Returns_CM)
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_str_eq(resultRomanString,"CM");
-    printf("Test 24 - Subtraction Sample Input 4 Returned Test Success\n");
+    printf("Test 26 - Subtraction Sample Input 4 Returned Test Success\n");
 }
 END_TEST
 
@@ -252,7 +252,7 @@ START_TEST(subtractionOf_XII_From_LXVIII_Returns_CM)
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_str_eq(resultRomanString,"LVI");
-    printf("Test 25 - Subtraction Sample Input 5 Returned Test Success\n");
+    printf("Test 27 - Subtraction Sample Input 5 Returned Test Success\n");
 }
 END_TEST
 
@@ -262,7 +262,7 @@ START_TEST(subtractionOf_XLIII_From_CXXIX_Returns_LXXXVI)
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_str_eq(resultRomanString,"LXXXVI");
-    printf("Test 26 - Subtraction Sample Input 6 Returned Test Success\n");
+    printf("Test 28 - Subtraction Sample Input 6 Returned Test Success\n");
 }
 END_TEST
 
@@ -272,7 +272,27 @@ START_TEST(subtractionOf_CD_From_CM_Returns_D)
     char resultRomanString[50] = {'\0'};
     int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
     ck_assert_str_eq(resultRomanString,"D");
-    printf("Test 28 - Subtraction Sample Input 7 Returned Test Success\n");
+    printf("Test 29 - Subtraction Sample Input 7 Returned Test Success\n");
+}
+END_TEST
+
+START_TEST(additionOf_CXXII_And_LXI_Returns_CLXXXIII)
+{
+    char *arg1 = "CXXII", *arg2 = "LXI";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = addRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"CLXXXIII");
+    printf("Test 19 - Addition Sample Input 16 Returned Test Success\n");
+}
+END_TEST
+
+START_TEST(additionOf_CCCLXVIIII_And_DCCCXXXXV_Returns_MCCXIV)
+{
+    char *arg1 = "CCCLXVIIII", *arg2 = "DCCCXXXXV";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = addRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"MCCXIV");
+    printf("Test 20 - Addition Sample Input 17 Returned Test Success\n");
 }
 END_TEST
 
@@ -307,6 +327,8 @@ Suite *romanCalculatorSuite(void)
     tcase_add_test(additionTestCase, additionOf_C_And_C_Returns_CC);
     tcase_add_test(additionTestCase, additionOf_D_And_CD_Returns_CM);
     tcase_add_test(additionTestCase, additionOf_D_And_D_Returns_M);
+    tcase_add_test(additionTestCase, additionOf_CXXII_And_LXI_Returns_CLXXXIII);
+    tcase_add_test(additionTestCase, additionOf_CCCLXVIIII_And_DCCCXXXXV_Returns_MCCXIV);
     
     /* Subtraction of Roman Literals - Test Cases */
     tcase_add_test(subtractionTestCase, subtractionOfEqualRomanStringsReturnsFailure);
