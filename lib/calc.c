@@ -77,13 +77,19 @@ int testWhetherArgumentsAreValid(char *arg1, char*arg2)
 
 void defineMapIntegerToRomanString(void)
 {
-    strcpy(myStruct[0].romanLiterals, "L");	myStruct[0].decimalValue = 50;
-    strcpy(myStruct[1].romanLiterals, "XL");	myStruct[1].decimalValue = 40;
-    strcpy(myStruct[2].romanLiterals, "X");	myStruct[2].decimalValue = 10;
-    strcpy(myStruct[3].romanLiterals, "IX");	myStruct[3].decimalValue = 9;
-    strcpy(myStruct[4].romanLiterals, "V");	myStruct[4].decimalValue = 5;
-    strcpy(myStruct[5].romanLiterals, "IV");	myStruct[5].decimalValue = 4;
-    strcpy(myStruct[6].romanLiterals, "I");	myStruct[6].decimalValue = 1;
+    strcpy(myStruct[0].romanLiterals, "M");	myStruct[0].decimalValue = 1000;
+    strcpy(myStruct[1].romanLiterals, "CM");	myStruct[1].decimalValue = 900;
+    strcpy(myStruct[2].romanLiterals, "D");	myStruct[2].decimalValue = 500;
+    strcpy(myStruct[3].romanLiterals, "CD");	myStruct[3].decimalValue = 400;
+    strcpy(myStruct[4].romanLiterals, "C");	myStruct[4].decimalValue = 100;
+    strcpy(myStruct[5].romanLiterals, "XC");	myStruct[5].decimalValue = 90;
+    strcpy(myStruct[6].romanLiterals, "L");	myStruct[6].decimalValue = 50;
+    strcpy(myStruct[7].romanLiterals, "XL");	myStruct[7].decimalValue = 40;
+    strcpy(myStruct[8].romanLiterals, "X");	myStruct[8].decimalValue = 10;
+    strcpy(myStruct[9].romanLiterals, "IX");	myStruct[9].decimalValue = 9;
+    strcpy(myStruct[10].romanLiterals, "V");	myStruct[10].decimalValue = 5;
+    strcpy(myStruct[11].romanLiterals, "IV");	myStruct[11].decimalValue = 4;
+    strcpy(myStruct[12].romanLiterals, "I");	myStruct[12].decimalValue = 1;
     
 }
 
@@ -96,6 +102,30 @@ int addRomanLiterals(char *arg1, char *arg2, char *resultRomanString)
     int resultDecimalValue;
     int indexMyStructArray = 0;
     resultDecimalValue = convertRomanStringToDecimalValue(arg1) + convertRomanStringToDecimalValue(arg2);
+    while(resultDecimalValue != 0) {
+        while(resultDecimalValue >= myStruct[indexMyStructArray].decimalValue) {
+            strcat(resultRomanString, myStruct[indexMyStructArray].romanLiterals);
+            resultDecimalValue = resultDecimalValue - myStruct[indexMyStructArray].decimalValue;
+        }
+        indexMyStructArray++;
+    }
+    return SUCCESS;
+}
+
+int subtractRomanLiterals(char *arg1, char *arg2, char *resultRomanString)
+{
+    if(testWhetherArgumentsAreValid(arg1, arg2) == FAILURE) {
+        return FAILURE;
+    }
+
+    int resultDecimalValue;
+    resultDecimalValue = convertRomanStringToDecimalValue(arg1) - convertRomanStringToDecimalValue(arg2);
+    if(resultDecimalValue <= 0) {
+        return FAILURE;
+    }
+
+    int indexMyStructArray = 0;
+    defineMapIntegerToRomanString();
     while(resultDecimalValue != 0) {
         while(resultDecimalValue >= myStruct[indexMyStructArray].decimalValue) {
             strcat(resultRomanString, myStruct[indexMyStructArray].romanLiterals);

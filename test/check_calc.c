@@ -156,6 +156,56 @@ START_TEST(additionOf_XX_And_XXX_Returns_L)
 }
 END_TEST
 
+START_TEST(additionOf_C_And_C_Returns_CC)
+{
+    char *arg1 = "C", *arg2 = "C";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = addRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"CC");
+    printf("Test 16 - Addition Sample Input 13 Returned Test Success\n");
+}
+END_TEST
+
+START_TEST(additionOf_D_And_CD_Returns_CM)
+{
+    char *arg1 = "D", *arg2 = "CD";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = addRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"CM");
+    printf("Test 17 - Addition Sample Input 14 Returned Test Success\n");
+}
+END_TEST
+
+START_TEST(additionOf_D_And_D_Returns_M)
+{
+    char *arg1 = "D", *arg2 = "D";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = addRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"M");
+    printf("Test 18 - Addition Sample Input 15 Returned Test Success\n");
+}
+END_TEST
+
+START_TEST(subtractionOfEqualRomanStringsReturnsFailure)
+{
+    char *arg1 = "D", *arg2 = "D";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_int_eq(testStatus,FAILURE);
+    printf("Test 19 - Subtraction Result of Zero Is Invalid Number in Roman - Returned Test Failure\n");
+}
+END_TEST
+
+START_TEST(subtractionResultEqualToNegativeValuesReturnsFailure)
+{
+    char *arg1 = "D", *arg2 = "M";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_int_eq(testStatus,FAILURE);
+    printf("Test 20 - Subtraction Result Equal To Negative Is Invalid Number in Roman - Returned Test Failure\n");
+}
+END_TEST
+
 Suite *romanCalculatorSuite(void)
 {
     Suite *testSuite;
@@ -184,11 +234,18 @@ Suite *romanCalculatorSuite(void)
     tcase_add_test(additionTestCase, additionOf_V_And_V_Returns_X);
     tcase_add_test(additionTestCase, additionOf_X_And_XXX_Returns_XL);
     tcase_add_test(additionTestCase, additionOf_XX_And_XXX_Returns_L);
+    tcase_add_test(additionTestCase, additionOf_C_And_C_Returns_CC);
+    tcase_add_test(additionTestCase, additionOf_D_And_CD_Returns_CM);
+    tcase_add_test(additionTestCase, additionOf_D_And_D_Returns_M);
     
+    /* Subtraction of Roman Literals - Test Cases */
+    tcase_add_test(subtractionTestCase, subtractionOfEqualRomanStringsReturnsFailure);
+    tcase_add_test(subtractionTestCase, subtractionResultEqualToNegativeValuesReturnsFailure);
 
 
     suite_add_tcase(testSuite, validateInputArgumentsTestCase);
     suite_add_tcase(testSuite, additionTestCase);
+    suite_add_tcase(testSuite, subtractionTestCase);
 
     return testSuite;
 }
