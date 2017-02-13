@@ -206,6 +206,36 @@ START_TEST(subtractionResultEqualToNegativeValuesReturnsFailure)
 }
 END_TEST
 
+START_TEST(subtractionOf_I_From_I_ReturnsFailure)
+{
+    char *arg1 = "I", *arg2 = "I";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_int_eq(testStatus,FAILURE);
+    printf("Test 21 - Subtraction Sample Input 1 Returned Test Failure\n");
+}
+END_TEST
+
+START_TEST(subtractionOf_I_From_X_Returns_IX)
+{
+    char *arg1 = "X", *arg2 = "I";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"IX");
+    printf("Test 22 - Subtraction Sample Input 2 Returned Test Failure\n");
+}
+END_TEST
+
+START_TEST(subtractionOf_V_From_C_Returns_LXLV)
+{
+    char *arg1 = "C", *arg2 = "V";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = subtractRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"XCV");
+    printf("Test 23 - Subtraction Sample Input 3 Returned Test Failure\n");
+}
+END_TEST
+
 Suite *romanCalculatorSuite(void)
 {
     Suite *testSuite;
@@ -241,6 +271,9 @@ Suite *romanCalculatorSuite(void)
     /* Subtraction of Roman Literals - Test Cases */
     tcase_add_test(subtractionTestCase, subtractionOfEqualRomanStringsReturnsFailure);
     tcase_add_test(subtractionTestCase, subtractionResultEqualToNegativeValuesReturnsFailure);
+    tcase_add_test(subtractionTestCase, subtractionOf_I_From_I_ReturnsFailure);
+    tcase_add_test(subtractionTestCase, subtractionOf_I_From_X_Returns_IX);
+    tcase_add_test(subtractionTestCase, subtractionOf_V_From_C_Returns_LXLV);
 
 
     suite_add_tcase(testSuite, validateInputArgumentsTestCase);
