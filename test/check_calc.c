@@ -126,6 +126,36 @@ START_TEST(additionOf_V_And_IIII_Returns_IX)
 }
 END_TEST
 
+START_TEST(additionOf_V_And_V_Returns_X)
+{
+    char *arg1 = "V", *arg2 = "V";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = addRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"X");
+    printf("Test 13 - Addition Sample Input 10 Returned Test Success\n");
+}
+END_TEST
+
+START_TEST(additionOf_X_And_XXX_Returns_XL)
+{
+    char *arg1 = "X", *arg2 = "XXX";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = addRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"XL");
+    printf("Test 14 - Addition Sample Input 11 Returned Test Success\n");
+}
+END_TEST
+
+START_TEST(additionOf_XX_And_XXX_Returns_L)
+{
+    char *arg1 = "XX", *arg2 = "XXX";
+    char resultRomanString[50] = {'\0'};
+    int testStatus = addRomanLiterals(arg1, arg2, resultRomanString);
+    ck_assert_str_eq(resultRomanString,"L");
+    printf("Test 15 - Addition Sample Input 12 Returned Test Success\n");
+}
+END_TEST
+
 Suite *romanCalculatorSuite(void)
 {
     Suite *testSuite;
@@ -151,6 +181,9 @@ Suite *romanCalculatorSuite(void)
     tcase_add_test(additionTestCase, additionOf_V_And_I_Returns_VI);
     tcase_add_test(additionTestCase, additionOf_V_And_III_Returns_VIII);
     tcase_add_test(additionTestCase, additionOf_V_And_IIII_Returns_IX);
+    tcase_add_test(additionTestCase, additionOf_V_And_V_Returns_X);
+    tcase_add_test(additionTestCase, additionOf_X_And_XXX_Returns_XL);
+    tcase_add_test(additionTestCase, additionOf_XX_And_XXX_Returns_L);
     
 
 
